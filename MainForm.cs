@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Microsoft.Win32;
 using cv = OpenCvSharp;
 using Cv2 = OpenCvSharp.Cv2;
 
@@ -16,7 +17,9 @@ namespace VignettingCorrection
 		public MainForm()
 		{
 			InitializeComponent();
-			pathImage.Text = @"C:\Downloads\org_image\1-1.bmp";
+			RegistryKey reg = Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("Biscuit-Lab").CreateSubKey("VignettingCorrection");
+			string str = Convert.ToString(reg.GetValue("ImagePath"));
+			pathImage.Text = (str == null) || (str.Length == 0) ? @"C:\Downloads\org_image\1-1.bmp" : str;
 			chkVignettingCorrection_Sub.Checked = true;
 			chkVignettingCorrection_Mul.Checked = false;
 		}
@@ -30,6 +33,13 @@ namespace VignettingCorrection
 					return;
 				var bitmap = cv::Extensions.BitmapConverter.ToBitmap(m_img);
 				pictureBox1.Image = bitmap;
+				pictureBox2.Image = null;
+				pictureBox3.Image = null;
+				pictureBox4.Image = null;
+
+				RegistryKey reg = Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("Biscuit-Lab").CreateSubKey("VignettingCorrection");
+				reg.SetValue("ImagePath", pathImage.Text);
+
 			} catch 
 			{
 				System.Windows.Forms.MessageBox.Show("Failed");
@@ -58,27 +68,6 @@ namespace VignettingCorrection
 					double dMin = 0.0, dMax = 0.0;
 					filter.MinMaxLoc(out dMin, out dMax);
 
-					//// emphasis
-					//filter = (filter - dMin) * 1.4 + dMin;
-					//filter.MinMaxLoc(out dMin, out dMax);
-					//for (int y = 0; y < img.Rows; y++)
-					//{
-					//	for (int x = 0; x < img.Cols; x++)
-					//	{
-					//		float s = filter.At<float>(y, x);
-					//		float org = img.At<byte>(y, x);
-					//		float v = (float)((dMax - s) / (dMax - dMin) * (s - org));
-					//		float pixel_m = v < 0 ? 0 : v;
-					//		double pixel_add = org + (dMax - s);
-					//		double pixel_mul = org * dMax / s;
-					//		double pixel_sub = org + (dMin - s);
-					//		double pixel = .0 * pixel_add + 0.0 * pixel_sub + 1.0 * pixel_mul + .0 * pixel_m;
-					//		img.At<byte>(y, x) = (byte)(pixel < 0 ? 0 : pixel > 255 ? 255 : pixel);
-					//	}
-					//}
-					//img += (dMax - dMin);
-					//img *= (dMax / dMin);
-
 					double weight = 0.0;
 					cv::Mat matC = new cv::Mat();
 					img.ConvertTo(matC, cv.MatType.CV_32F);
@@ -87,13 +76,13 @@ namespace VignettingCorrection
 					if (chkVignettingCorrection_Sub.Checked)
 					{
 						weight += 1.0;
-						matR += matC - filter + (float)dMax;
+						matR += matC - filter + dMax;
 					}
 
 					if (chkVignettingCorrection_Mul.Checked)
 					{
 						weight += 1.0;
-						matR += matC.Mul((float)dMax / filter);
+						matR += matC.Mul(dMax / filter);
 					}
 
 					if (weight == 0)
@@ -170,9 +159,7 @@ namespace VignettingCorrection
 					cv.Point2f pt = p0.Pt;
 					float diameter = p0.Size;
 
-					//cv::Rect rcCircle = new cv::Rect((int)(pt.X - diameter), (int)(pt.Y - diameter), (int)(diameter * 2), (int)(diameter * 2));
-					//Cv2.Circle(imgD, (int)pt.X, (int)pt.Y, (int)(diameter / 2.0f), new cv.Scalar(0, 192, 0));
-					Cv2.PutText(imgD, $"{diameter:F1}", new cv::Point((int)pt.X-100, (int)pt.Y),
+					Cv2.PutText(imgD, $"{diameter:F1}", new cv::Point((int)pt.X-120, (int)pt.Y+80),
 						cv::HersheyFonts.HersheyPlain, 6.0, new cv::Scalar(0, 192, 0), 5);
 				}
 
@@ -193,6 +180,22 @@ namespace VignettingCorrection
 		private void btnFindDotsOrg_Click(object sender, EventArgs e)
 		{
 			FindDots(m_img, pictureBox4);
+		}
+
+		private void btnBrowseImage_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog dlg = new OpenFileDialog();
+			dlg.Filter = "image files (*.png;*.jpg;*.bmp)|*.png;*.jpg;*.bmp|All files (*.*)|*.*||";
+			dlg.Multiselect = false;
+			dlg.ReadOnlyChecked = true;
+			dlg.ShowReadOnly = false;
+			DialogResult r = dlg.ShowDialog();
+			if (r != DialogResult.OK)
+				return;
+
+			pathImage.Text = dlg.FileName;
+
+			btnOpenImage_Click(sender, e);
 		}
 	}
 }

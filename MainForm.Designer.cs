@@ -28,50 +28,52 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.btnOpenImage = new System.Windows.Forms.Button();
 			this.pathImage = new System.Windows.Forms.TextBox();
 			this.btnBrowseImage = new System.Windows.Forms.Button();
-			this.btnOpenImage = new System.Windows.Forms.Button();
 			this.pictureBox1 = new System.Windows.Forms.PictureBox();
 			this.pictureBox2 = new System.Windows.Forms.PictureBox();
 			this.pictureBox3 = new System.Windows.Forms.PictureBox();
-			this.btnCorrectVignetting = new System.Windows.Forms.Button();
-			this.btnFindDots = new System.Windows.Forms.Button();
 			this.pictureBox4 = new System.Windows.Forms.PictureBox();
 			this.btnFindDotsOrg = new System.Windows.Forms.Button();
-			this.chkShowImage = new System.Windows.Forms.CheckBox();
+			this.btnFindDots = new System.Windows.Forms.Button();
+			this.btnCorrectVignetting = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
 			this.chkVignettingCorrection_Sub = new System.Windows.Forms.CheckBox();
 			this.chkVignettingCorrection_Mul = new System.Windows.Forms.CheckBox();
+			this.chkShowImage = new System.Windows.Forms.CheckBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
 			this.SuspendLayout();
 			// 
+			// btnOpenImage
+			// 
+			this.btnOpenImage.Location = new System.Drawing.Point(12, 12);
+			this.btnOpenImage.Name = "btnOpenImage";
+			this.btnOpenImage.Size = new System.Drawing.Size(75, 23);
+			this.btnOpenImage.TabIndex = 1;
+			this.btnOpenImage.Text = "Open";
+			this.btnOpenImage.UseVisualStyleBackColor = true;
+			this.btnOpenImage.Click += new System.EventHandler(this.btnOpenImage_Click);
+			// 
 			// pathImage
 			// 
 			this.pathImage.Location = new System.Drawing.Point(90, 12);
 			this.pathImage.Name = "pathImage";
 			this.pathImage.Size = new System.Drawing.Size(375, 23);
-			this.pathImage.TabIndex = 1;
+			this.pathImage.TabIndex = 2;
 			// 
 			// btnBrowseImage
 			// 
 			this.btnBrowseImage.Location = new System.Drawing.Point(471, 12);
 			this.btnBrowseImage.Name = "btnBrowseImage";
 			this.btnBrowseImage.Size = new System.Drawing.Size(34, 23);
-			this.btnBrowseImage.TabIndex = 2;
+			this.btnBrowseImage.TabIndex = 3;
 			this.btnBrowseImage.Text = "...";
 			this.btnBrowseImage.UseVisualStyleBackColor = true;
-			// 
-			// btnOpenImage
-			// 
-			this.btnOpenImage.Location = new System.Drawing.Point(12, 12);
-			this.btnOpenImage.Name = "btnOpenImage";
-			this.btnOpenImage.Size = new System.Drawing.Size(75, 23);
-			this.btnOpenImage.TabIndex = 3;
-			this.btnOpenImage.Text = "Open";
-			this.btnOpenImage.UseVisualStyleBackColor = true;
-			this.btnOpenImage.Click += new System.EventHandler(this.btnOpenImage_Click);
+			this.btnBrowseImage.Click += new System.EventHandler(this.btnBrowseImage_Click);
 			// 
 			// pictureBox1
 			// 
@@ -88,7 +90,7 @@
 			this.pictureBox2.Name = "pictureBox2";
 			this.pictureBox2.Size = new System.Drawing.Size(640, 480);
 			this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBox2.TabIndex = 4;
+			this.pictureBox2.TabIndex = 5;
 			this.pictureBox2.TabStop = false;
 			// 
 			// pictureBox3
@@ -97,28 +99,8 @@
 			this.pictureBox3.Name = "pictureBox3";
 			this.pictureBox3.Size = new System.Drawing.Size(640, 480);
 			this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBox3.TabIndex = 4;
+			this.pictureBox3.TabIndex = 6;
 			this.pictureBox3.TabStop = false;
-			// 
-			// btnCorrectVignetting
-			// 
-			this.btnCorrectVignetting.Location = new System.Drawing.Point(12, 527);
-			this.btnCorrectVignetting.Name = "btnCorrectVignetting";
-			this.btnCorrectVignetting.Size = new System.Drawing.Size(163, 23);
-			this.btnCorrectVignetting.TabIndex = 5;
-			this.btnCorrectVignetting.Text = "Vignetting Correction";
-			this.btnCorrectVignetting.UseVisualStyleBackColor = true;
-			this.btnCorrectVignetting.Click += new System.EventHandler(this.btnCorrectVignetting_Click);
-			// 
-			// btnFindDots
-			// 
-			this.btnFindDots.Location = new System.Drawing.Point(678, 527);
-			this.btnFindDots.Name = "btnFindDots";
-			this.btnFindDots.Size = new System.Drawing.Size(75, 23);
-			this.btnFindDots.TabIndex = 6;
-			this.btnFindDots.Text = "Search";
-			this.btnFindDots.UseVisualStyleBackColor = true;
-			this.btnFindDots.Click += new System.EventHandler(this.btnFindDots_Click);
 			// 
 			// pictureBox4
 			// 
@@ -126,7 +108,7 @@
 			this.pictureBox4.Name = "pictureBox4";
 			this.pictureBox4.Size = new System.Drawing.Size(640, 480);
 			this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-			this.pictureBox4.TabIndex = 4;
+			this.pictureBox4.TabIndex = 7;
 			this.pictureBox4.TabStop = false;
 			// 
 			// btnFindDotsOrg
@@ -134,46 +116,76 @@
 			this.btnFindDotsOrg.Location = new System.Drawing.Point(678, 12);
 			this.btnFindDotsOrg.Name = "btnFindDotsOrg";
 			this.btnFindDotsOrg.Size = new System.Drawing.Size(75, 23);
-			this.btnFindDotsOrg.TabIndex = 7;
+			this.btnFindDotsOrg.TabIndex = 8;
 			this.btnFindDotsOrg.Text = "Search";
 			this.btnFindDotsOrg.UseVisualStyleBackColor = true;
 			this.btnFindDotsOrg.Click += new System.EventHandler(this.btnFindDotsOrg_Click);
 			// 
-			// chkShowImage
+			// btnFindDots
 			// 
-			this.chkShowImage.AutoSize = true;
-			this.chkShowImage.Location = new System.Drawing.Point(184, 530);
-			this.chkShowImage.Name = "chkShowImage";
-			this.chkShowImage.Size = new System.Drawing.Size(91, 19);
-			this.chkShowImage.TabIndex = 8;
-			this.chkShowImage.Text = "Show Image";
-			this.chkShowImage.UseVisualStyleBackColor = true;
+			this.btnFindDots.Location = new System.Drawing.Point(678, 527);
+			this.btnFindDots.Name = "btnFindDots";
+			this.btnFindDots.Size = new System.Drawing.Size(75, 23);
+			this.btnFindDots.TabIndex = 14;
+			this.btnFindDots.Text = "Search";
+			this.btnFindDots.UseVisualStyleBackColor = true;
+			this.btnFindDots.Click += new System.EventHandler(this.btnFindDots_Click);
+			// 
+			// btnCorrectVignetting
+			// 
+			this.btnCorrectVignetting.Location = new System.Drawing.Point(12, 527);
+			this.btnCorrectVignetting.Name = "btnCorrectVignetting";
+			this.btnCorrectVignetting.Size = new System.Drawing.Size(163, 23);
+			this.btnCorrectVignetting.TabIndex = 9;
+			this.btnCorrectVignetting.Text = "Vignetting Correction";
+			this.btnCorrectVignetting.UseVisualStyleBackColor = true;
+			this.btnCorrectVignetting.Click += new System.EventHandler(this.btnCorrectVignetting_Click);
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(183, 531);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(61, 15);
+			this.label1.TabIndex = 10;
+			this.label1.Text = "알고리즘 :";
 			// 
 			// chkVignettingCorrection_Sub
 			// 
 			this.chkVignettingCorrection_Sub.AutoSize = true;
-			this.chkVignettingCorrection_Sub.Location = new System.Drawing.Point(305, 530);
+			this.chkVignettingCorrection_Sub.Location = new System.Drawing.Point(254, 530);
 			this.chkVignettingCorrection_Sub.Name = "chkVignettingCorrection_Sub";
-			this.chkVignettingCorrection_Sub.Size = new System.Drawing.Size(31, 19);
-			this.chkVignettingCorrection_Sub.TabIndex = 9;
-			this.chkVignettingCorrection_Sub.Text = "-";
+			this.chkVignettingCorrection_Sub.Size = new System.Drawing.Size(50, 19);
+			this.chkVignettingCorrection_Sub.TabIndex = 11;
+			this.chkVignettingCorrection_Sub.Text = "빼기";
 			this.chkVignettingCorrection_Sub.UseVisualStyleBackColor = true;
 			// 
 			// chkVignettingCorrection_Mul
 			// 
 			this.chkVignettingCorrection_Mul.AutoSize = true;
-			this.chkVignettingCorrection_Mul.Location = new System.Drawing.Point(342, 530);
+			this.chkVignettingCorrection_Mul.Location = new System.Drawing.Point(308, 530);
 			this.chkVignettingCorrection_Mul.Name = "chkVignettingCorrection_Mul";
-			this.chkVignettingCorrection_Mul.Size = new System.Drawing.Size(32, 19);
-			this.chkVignettingCorrection_Mul.TabIndex = 9;
-			this.chkVignettingCorrection_Mul.Text = "x";
+			this.chkVignettingCorrection_Mul.Size = new System.Drawing.Size(62, 19);
+			this.chkVignettingCorrection_Mul.TabIndex = 12;
+			this.chkVignettingCorrection_Mul.Text = "곱하기";
 			this.chkVignettingCorrection_Mul.UseVisualStyleBackColor = true;
+			// 
+			// chkShowImage
+			// 
+			this.chkShowImage.AutoSize = true;
+			this.chkShowImage.Location = new System.Drawing.Point(502, 531);
+			this.chkShowImage.Name = "chkShowImage";
+			this.chkShowImage.Size = new System.Drawing.Size(129, 19);
+			this.chkShowImage.TabIndex = 13;
+			this.chkShowImage.Text = "Show Fitting Matrix";
+			this.chkShowImage.UseVisualStyleBackColor = true;
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1506, 1037);
+			this.Controls.Add(this.label1);
 			this.Controls.Add(this.chkVignettingCorrection_Mul);
 			this.Controls.Add(this.chkVignettingCorrection_Sub);
 			this.Controls.Add(this.chkShowImage);
@@ -212,5 +224,6 @@
 		private CheckBox chkShowImage;
 		private CheckBox chkVignettingCorrection_Sub;
 		private CheckBox chkVignettingCorrection_Mul;
+		private Label label1;
 	}
 }
