@@ -40,7 +40,10 @@ namespace VignettingCorrection
 				RegistryKey reg = Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("Biscuit-Lab").CreateSubKey("VignettingCorrection");
 				reg.SetValue("ImagePath", pathImage.Text);
 
-			} catch 
+				btnCorrectVignetting_Click(sender, e);
+				btnFindDotsOrg_Click(sender, e);
+			}
+			catch 
 			{
 				System.Windows.Forms.MessageBox.Show("Failed");
 			}
@@ -106,6 +109,8 @@ namespace VignettingCorrection
 				}
 
 				pictureBox2.Image = cv::Extensions.BitmapConverter.ToBitmap(m_imgV);
+
+				btnFindDots_Click(sender, e);
 			}
 			finally
 			{
