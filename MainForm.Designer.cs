@@ -42,10 +42,16 @@
 			this.chkVignettingCorrection_Sub = new System.Windows.Forms.CheckBox();
 			this.chkVignettingCorrection_Mul = new System.Windows.Forms.CheckBox();
 			this.chkShowImage = new System.Windows.Forms.CheckBox();
+			this.pictureBox5 = new System.Windows.Forms.PictureBox();
+			this.btnRemoveDefect1 = new System.Windows.Forms.Button();
+			this.btnRemoveDefect2 = new System.Windows.Forms.Button();
+			this.pictureBox6 = new System.Windows.Forms.PictureBox();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnOpenImage
@@ -180,11 +186,52 @@
 			this.chkShowImage.Text = "Show Fitting Matrix";
 			this.chkShowImage.UseVisualStyleBackColor = true;
 			// 
+			// pictureBox5
+			// 
+			this.pictureBox5.Location = new System.Drawing.Point(1341, 41);
+			this.pictureBox5.Name = "pictureBox5";
+			this.pictureBox5.Size = new System.Drawing.Size(640, 480);
+			this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBox5.TabIndex = 6;
+			this.pictureBox5.TabStop = false;
+			// 
+			// btnRemoveDefect1
+			// 
+			this.btnRemoveDefect1.Location = new System.Drawing.Point(1341, 12);
+			this.btnRemoveDefect1.Name = "btnRemoveDefect1";
+			this.btnRemoveDefect1.Size = new System.Drawing.Size(150, 23);
+			this.btnRemoveDefect1.TabIndex = 15;
+			this.btnRemoveDefect1.Text = "Remove Defect 1";
+			this.btnRemoveDefect1.UseVisualStyleBackColor = true;
+			this.btnRemoveDefect1.Click += new System.EventHandler(this.btnRemoveDefect1_Click);
+			// 
+			// btnRemoveDefect2
+			// 
+			this.btnRemoveDefect2.Location = new System.Drawing.Point(1341, 526);
+			this.btnRemoveDefect2.Name = "btnRemoveDefect2";
+			this.btnRemoveDefect2.Size = new System.Drawing.Size(150, 23);
+			this.btnRemoveDefect2.TabIndex = 17;
+			this.btnRemoveDefect2.Text = "Remove Defect 2";
+			this.btnRemoveDefect2.UseVisualStyleBackColor = true;
+			this.btnRemoveDefect2.Click += new System.EventHandler(this.btnRemoveDefect2_Click);
+			// 
+			// pictureBox6
+			// 
+			this.pictureBox6.Location = new System.Drawing.Point(1341, 555);
+			this.pictureBox6.Name = "pictureBox6";
+			this.pictureBox6.Size = new System.Drawing.Size(640, 480);
+			this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+			this.pictureBox6.TabIndex = 16;
+			this.pictureBox6.TabStop = false;
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1506, 1037);
+			this.ClientSize = new System.Drawing.Size(2179, 1037);
+			this.Controls.Add(this.btnRemoveDefect2);
+			this.Controls.Add(this.pictureBox6);
+			this.Controls.Add(this.btnRemoveDefect1);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.chkVignettingCorrection_Mul);
 			this.Controls.Add(this.chkVignettingCorrection_Sub);
@@ -193,6 +240,7 @@
 			this.Controls.Add(this.btnFindDots);
 			this.Controls.Add(this.btnCorrectVignetting);
 			this.Controls.Add(this.pictureBox4);
+			this.Controls.Add(this.pictureBox5);
 			this.Controls.Add(this.pictureBox3);
 			this.Controls.Add(this.pictureBox2);
 			this.Controls.Add(this.pictureBox1);
@@ -205,6 +253,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -225,5 +275,9 @@
 		private CheckBox chkVignettingCorrection_Sub;
 		private CheckBox chkVignettingCorrection_Mul;
 		private Label label1;
+		private PictureBox pictureBox5;
+		private Button btnRemoveDefect1;
+		private Button btnRemoveDefect2;
+		private PictureBox pictureBox6;
 	}
 }

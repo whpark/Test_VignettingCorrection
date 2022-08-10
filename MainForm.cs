@@ -202,5 +202,90 @@ namespace VignettingCorrection
 
 			btnOpenImage_Click(sender, e);
 		}
+		private static void RemoveDefect1(cv::Mat img, PictureBox box)
+		{
+			if (img == null) return;
+
+			try
+			{
+				Cursor.Current = Cursors.WaitCursor;
+
+				cv::Mat imgD = new cv::Mat(img.Size(), img.Type());
+
+				// to gray
+				Cv2.CvtColor(img, imgD, cv::ColorConversionCodes.BGR2GRAY);
+
+				int k = 21;
+				cv::Mat imgD2 = new cv::Mat(img.Size(), cv::MatType.CV_8UC1);
+				Cv2.Dilate(imgD, imgD2, new cv::Mat(k, k, cv::MatType.CV_8UC1));
+				Cv2.Erode(imgD2, imgD, new cv::Mat(k, k, cv::MatType.CV_8UC1));
+				Cv2.Dilate(imgD, imgD2, new cv::Mat(k, k, cv::MatType.CV_8UC1));
+				Cv2.Erode(imgD2, imgD, new cv::Mat(k, k, cv::MatType.CV_8UC1));
+
+				box.Image = cv::Extensions.BitmapConverter.ToBitmap(imgD);
+			}
+			finally
+			{
+				Cursor.Current = Cursors.Default;
+			}
+		}
+		private static void RemoveDefect2(cv::Mat img, PictureBox box)
+		{
+			if (img == null) return;
+
+			try
+			{
+				Cursor.Current = Cursors.WaitCursor;
+
+				cv::Mat imgD = new cv::Mat(img.Size(), img.Type());
+
+				// to gray;
+				Cv2.CvtColor(img, imgD, cv::ColorConversionCodes.BGR2GRAY);
+				cv::Scalar mean = imgD.Mean();
+				double threshold = mean[0] * 4 / 5;	// 원래는 Histogram 구해서 써야 되는데, C#에서 CalcHist 사용법이 너무 복잡해서, 이미지에서 그냥 평균값 사용.
+
+				cv::Mat imgB = new cv::Mat(img.Size(), cv::MatType.CV_8UC1);
+				Cv2.Threshold(imgD, imgB, threshold, 255, cv.ThresholdTypes.Binary);
+
+				for (int y = 0; y < imgB.Rows; y++)
+				{
+					for (int x = 0; x < imgB.Cols; x++)
+					{
+						if (imgB.At<byte>(y, x) == 0)
+						{
+							int window = 31;
+							cv::Rect roi = new cv::Rect(x-window/2, y-window/2, window, window);
+							if (roi.X < 0)
+								roi.X = 0;
+							if (roi.Y < 0)
+								roi.Y = 0;
+							if (roi.Right >= imgD.Width)
+								break;
+							if (roi.Bottom >= imgD.Height)
+								break;
+							cv::Scalar m = imgD.SubMat(roi).Mean(imgB.SubMat(roi));
+
+							imgD.At<byte>(y, x) = (byte)m[0];
+						}
+					}
+				}
+
+				box.Image = cv::Extensions.BitmapConverter.ToBitmap(imgD);
+			}
+			finally
+			{
+				Cursor.Current = Cursors.Default;
+			}
+		}
+
+		private void btnRemoveDefect1_Click(object sender, EventArgs e)
+		{
+			RemoveDefect1(m_img, pictureBox5);
+		}
+
+		private void btnRemoveDefect2_Click(object sender, EventArgs e)
+		{
+			RemoveDefect2(m_img, pictureBox6);
+		}
 	}
 }
